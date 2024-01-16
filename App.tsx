@@ -1,20 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Login from './app/screen/login';
+import { useEffect, useState } from 'react';
+import { User, onAuthStateChanged } from 'firebase/auth';
+import { FIREBASE_AUTH } from './FirebaseConfig';
+import Home from './app/screen/home';
+import Detail from './app/screen/detail';
 
-export default function App() {
+const Stack = createNativeStackNavigator();
+
+export default function Page() {
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    onAuthStateChanged(FIREBASE_AUTH, (user) => {
+      console.log('user', user)
+      setUser(user)
+    })
+  }, [])
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName='Home'>
+        <Stack.Screen name='Home' component={Home} options={{headerShown: false}}/>
+        <Stack.Screen name='Login' component={Login} options={{headerShown: false}}/>
+        <Stack.Screen name='Detail' component={Detail} options={{title: "Detail"}}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
