@@ -10,7 +10,8 @@ type CartStore = {
   count: () => number;
   add: (car: Car) => void,
   remove: (car_id: number) => void,
-  removeAll: () => void
+  removeAll: () => void,
+  total: () => number,
 }
 
 export const useCartStore = create<CartStore>((set, get) => ({
@@ -32,6 +33,11 @@ export const useCartStore = create<CartStore>((set, get) => ({
     set({ cart: updatedCart });
   },
   removeAll: () => set({ cart: [] }),
+  total: () => {
+    const { cart } = get();
+    const value = totalCart(cart);
+    return value
+  }
 }));
 
 function updateCart(car: Car, cart: CartItem[]): CartItem[] {
@@ -59,4 +65,8 @@ function removeCart(car_id: number, cart: CartItem[]): CartItem[] {
   }).filter(item => {
     return item.count;
   });
+}
+
+function totalCart(cart: CartItem[]): number{
+  return cart.reduce((total, item) => total += item.price, 0 )
 }

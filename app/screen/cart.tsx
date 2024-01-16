@@ -7,8 +7,8 @@ import CartItemCard from "../components/cartItem";
 const Cart = () => {
   const width = (Dimensions.get("screen").width - 32) / 2;
   const styles = useMemo(() => createStyleSheet(width), [])
-  const { cart } = useCartStore();
-
+  const { cart, total } = useCartStore();
+  const value = total();
   return (
     <>
       <View style={styles.container}>
@@ -24,7 +24,7 @@ const Cart = () => {
         </View>
         <View style={styles.textContainer}>
           <Text style={styles.subtitleText}>Total</Text>
-          <Text style={styles.titleText}>30.000</Text>
+          <Text style={styles.titleText}>{value}</Text>
         </View>
       </View>
 
