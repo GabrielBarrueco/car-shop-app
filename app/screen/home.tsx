@@ -27,19 +27,19 @@ const Home = () => {
 
   return(
     <View style={styles.container}>
-        <View>
+        <View style={styles.headerContainer}>
           <Text style={styles.titleText}>Discover</Text>
           <TouchableOpacity style={styles.cartButton} onPress={handleCardTap}>
             <ShoppingCart color="#000"/>
           </TouchableOpacity>
         </View>
-        <TextInput 
+        {/* <TextInput 
           style={styles.input} 
           value={search} 
           placeholder="Search cars" 
           autoCapitalize="none" 
           onChangeText={(text) => setSearch(text)}
-        />
+        /> */}
         <FlatList 
           data={cars} 
           numColumns={2}
@@ -81,5 +81,13 @@ const styles = StyleSheet.create({
   cartButton: {
     height: 20,
     width: 20,
-  }
+  },
+  headerContainer: {
+    flexDirection: "row",
+    alignContent: "center",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 8,
+    paddingHorizontal: 12,
+  },
 });
