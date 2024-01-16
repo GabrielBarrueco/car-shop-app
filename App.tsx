@@ -6,6 +6,7 @@ import { User, onAuthStateChanged } from 'firebase/auth';
 import { FIREBASE_AUTH } from './FirebaseConfig';
 import Home from './app/screen/home';
 import Detail from './app/screen/detail';
+import Cart from './app/screen/cart';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +26,7 @@ export default function Page() {
         <Stack.Screen name='Home' component={Home} options={{headerShown: false}}/>
         <Stack.Screen name='Login' component={Login} options={{headerShown: false}}/>
         <Stack.Screen name='Detail' component={Detail} options={{title: "Detail"}}/>
+        <Stack.Screen name='Cart' component={Cart} options={{title: "Cart"}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

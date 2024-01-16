@@ -2,14 +2,16 @@ import { View, TextInput, StyleSheet, Text, TouchableOpacity, FlatList } from "r
 import React, { useEffect, useState } from "react";
 import Card from "../components/card";
 import { getCarsList } from "../../service/api";
-import { Car, Cars } from "../../service/api.interface";
-
+import { Car } from "../../service/api.interface";
+import { ShoppingCart } from 'lucide-react-native';
+import { useNavigation } from "@react-navigation/native";
 
 
 const Home = () => {
   const [cars, setCars] = useState<Car[] | null>(null);
   const [search, setSearch] = useState('');
-
+  const navigation = useNavigation();
+  
   useEffect(() => {
     getCars();
   }, [])
@@ -19,9 +21,18 @@ const Home = () => {
     setCars(response)
   }
 
+  const handleCardTap = () => {
+    navigation.navigate("Cart")
+  }
+
   return(
     <View style={styles.container}>
-        <Text style={styles.titleText}>Discover</Text>
+        <View>
+          <Text style={styles.titleText}>Discover</Text>
+          <TouchableOpacity style={styles.cartButton} onPress={handleCardTap}>
+            <ShoppingCart color="#000"/>
+          </TouchableOpacity>
+        </View>
         <TextInput 
           style={styles.input} 
           value={search} 
@@ -67,4 +78,8 @@ const styles = StyleSheet.create({
     lineHeight: 49, /* 153.125% */
     letterSpacing: -1.6,
   },
+  cartButton: {
+    height: 20,
+    width: 20,
+  }
 });

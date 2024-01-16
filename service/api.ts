@@ -9,6 +9,7 @@ export const getCarsList = async (): Promise<Car[]> => {
     query Cars {
     cars {
       id,
+      car_id,
       description,
       name,
       image {

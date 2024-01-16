@@ -1,76 +1,71 @@
-import { StyleSheet, Text, Image, Dimensions, View, TouchableOpacity, FlatList, ScrollView} from "react-native";
+import { StyleSheet, Text, Image, Dimensions, View, TouchableOpacity, FlatList, ScrollView } from "react-native";
 import React, { useMemo, useState } from "react";
 import { Car } from "../../service/api.interface";
 import { useCartStore } from "../../store/cartStore";
+import CartItemCard from "../components/cartItem";
 
-const Detail = ({route}) => {
-  const width = (Dimensions.get("screen").width - 32) /2;
-  const styles = useMemo(() => createStyleSheet(width), [])  
-  const {add: handleAddToCart} = useCartStore();
-  const { car } = route.params
-  console.log("car ->", car)
+const Cart = () => {
+  const width = (Dimensions.get("screen").width - 32) / 2;
+  const styles = useMemo(() => createStyleSheet(width), [])
+  const { cart } = useCartStore();
 
-  return(
+  return (
     <>
-    <View style={styles.container}>
-      <View style={styles.FlatListContainer}>
-        <FlatList horizontal
-          data={car.image}
-          renderItem={({item}) => {
-            return (
-              <Image 
-                style={styles.imageContainer} 
-                source={{uri: item.url}}
-              />
-            )
-          }}
-        />
-      </View>
-      <View style={styles.textContainer}>
-        <Text style={styles.titleText}>{car.name}</Text>
-        <View style={styles.categoryContainer}>
-          <Text>{car.category}</Text>
+      <View style={styles.container}>
+        <View>
+          <FlatList
+            data={cart}
+            renderItem={({ item }) => {
+              return (
+                <CartItemCard cartItem={item}/>
+              )
+            }}
+          />
         </View>
-        <Text style={styles.subtitleText}>{car.description}</Text>
-      </View>
-      </View>
-      <View style={styles.bottomContainer}>
         <View style={styles.textContainer}>
-          <Text style={styles.subtitleText}>Price</Text>
-          <Text style={styles.titleText}>{`${car.price}`}</Text>
+          <Text style={styles.subtitleText}>Total</Text>
+          <Text style={styles.titleText}>30.000</Text>
         </View>
-        <TouchableOpacity 
-          style={styles.addToCartButton} 
-          onPress={() => handleAddToCart(car)}
+      </View>
+
+      <View style={styles.bottomContainer}>
+        <TouchableOpacity
+          style={styles.checkoutButton}
+          onPress={() => {}}
         >
-          <Text style={styles.buttonText}>Add to Cart</Text>
+          <Text style={styles.buttonText}>Checkout</Text>
         </TouchableOpacity>
       </View>
     </>
   )
 }
 
-export default Detail;
+export default Cart;
+
 function createStyleSheet(cardWidth: number) {
   return StyleSheet.create({
     container: {
       paddingHorizontal: 16,
       marginTop: 12,
       flex: 1,
-      justifyContent: "center",
+      justifyContent: "flex-start",
     },
     textContainer: {
       flex: 1,
+      flexDirection: "row",
       marginTop: 4,
       paddingHorizontal: 4,
-      justifyContent: "flex-start",
+      alignContent: "flex-end",
+      justifyContent: "space-between",
+      alignItems: "flex-end",
+      padding: 12,
     },
     titleText: {
       color: "#000",
       fontFamily: "Arial",
-      fontSize: 24,
+      fontSize: 18,
       fontStyle: "normal",
-      fontWeight: "600",
+      fontWeight: "400",
       lineHeight: 32,
       borderColor: "#000",
       letterSpacing: -1,
@@ -84,12 +79,6 @@ function createStyleSheet(cardWidth: number) {
       marginTop: 12,
       textAlign: "left"
     },
-    FlatListContainer: {
-      flex: 1,
-      height: 360,
-      borderRadius: 8,
-      marginRight: 4,
-    },
     imageContainer: {
       flex: 1,
       width: 340,
@@ -97,11 +86,11 @@ function createStyleSheet(cardWidth: number) {
       borderRadius: 8,
       marginRight: 4,
     },
-    categoryContainer: {
-      height: 48,
-      width: 80,
+    itemContainer: {
+      flex: 1,
+      height: 100,
       padding: 12,
-      flexDirection: "column",
+      flexDirection: "row",
       justifyContent: "center",
       alignItems: "center",
       gap: 12.5,
@@ -110,7 +99,7 @@ function createStyleSheet(cardWidth: number) {
       borderWidth: 1.3,
       border: "solid",
       borderColor: "rgba(0, 0, 0, 0.20)",
-      marginTop: 8, 
+      marginTop: 8,
     },
     bottomContainer: {
       paddingHorizontal: 16,
@@ -126,8 +115,8 @@ function createStyleSheet(cardWidth: number) {
       alignItems: "flex-start",
 
     },
-    addToCartButton: {
-      width: 190,
+    checkoutButton: {
+      flex: 1,
       paddingHorizontal: 18,
       justifyContent: "center",
       alignItems: "center",
