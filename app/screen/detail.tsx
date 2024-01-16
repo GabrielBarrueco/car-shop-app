@@ -37,7 +37,7 @@ const Detail = ({route}) => {
       <View style={styles.bottomContainer}>
         <View style={styles.textContainer}>
           <Text style={styles.subtitleText}>Price</Text>
-          <Text style={styles.titleText}>{`${car.price}`}</Text>
+          <Text style={styles.titleText}>{`C$${car.price}`}</Text>
         </View>
         <TouchableOpacity 
           style={styles.addToCartButton} 
@@ -94,7 +94,7 @@ function createStyleSheet(cardWidth: number) {
       flex: 1,
       width: 340,
       height: 360,
-      borderRadius: 8,
+      borderRadius: 4,
       marginRight: 4,
     },
     categoryContainer: {

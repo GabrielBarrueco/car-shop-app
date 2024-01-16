@@ -36,7 +36,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
   total: () => {
     const { cart } = get();
     const value = totalCart(cart);
-    return value
+    return value.toFixed(4)
   }
 }));
 

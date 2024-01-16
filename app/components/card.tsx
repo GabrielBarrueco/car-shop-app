@@ -24,7 +24,7 @@ const Card = (props: ICardProps) => {
       />
       <View style={styles.textContainer}>
         <Text style={styles.titleText}>{props.car.name}</Text>
-        <Text style={styles.subtitleText}>{`${props.car.price}`}</Text>
+        <Text style={styles.subtitleText}>{`C$${props.car.price}`}</Text>
       </View>
     </TouchableOpacity>
   )
