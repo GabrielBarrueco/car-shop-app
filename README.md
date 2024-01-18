@@ -62,7 +62,6 @@ Follow these steps to get the Car Shop App up and running on your local machine:
    npm start
    ```
 
-
 ## License 📄
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
@@ -79,4 +78,6 @@ While the overall structure and layout have been influenced by the prototype, I'
 
 Thank you to the Figma community for providing resources that inspire and facilitate the creative process.
 
+## Demo 🚗
 
+https://github.com/GabrielBarrueco/car-shop-app/assets/38480149/3559ff24-ccfe-4231-bba8-b5b6efea3489
