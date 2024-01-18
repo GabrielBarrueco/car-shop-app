@@ -43,7 +43,7 @@ const Cart = () => {
           </View>
           <View style={styles.textContainer}>
             <Text style={styles.subtitleText}>Total</Text>
-            <Text style={styles.titleText}>{value}</Text>
+            <Text style={styles.titleText}>{value.toFixed(2)}</Text>
           </View>
         </View>
       </SafeAreaView>
