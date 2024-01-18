@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { User, onAuthStateChanged } from 'firebase/auth';
 import { FIREBASE_AUTH } from './FirebaseConfig';
 import { TabNavigator } from './routes/tab.navigator';
+import WelcomeStack from './routes/welcome.navigator';
 
 export default function Page() {
   const [user, setUser] = useState<User | null>(null);
@@ -16,7 +17,7 @@ export default function Page() {
 
   return (
     <NavigationContainer>
-      <TabNavigator />
+      <WelcomeStack />
     </NavigationContainer>
   );
 }

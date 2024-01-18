@@ -2,12 +2,19 @@ import { View, TextInput, StyleSheet, ActivityIndicator, KeyboardAvoidingView, T
 import React, { useState } from "react";
 import { FIREBASE_AUTH } from "../../FirebaseConfig";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth"
+import { useNavigation } from "@react-navigation/native";
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const auth = FIREBASE_AUTH;
+
+  const navigation = useNavigation();
+
+  const handleCardTap = () => {
+    navigation.navigate("HomeStack")
+  }
 
   const signIn = async () => {
     setLoading(true);
@@ -18,6 +25,7 @@ const Login = () => {
     }finally{
       setLoading(false)
       alert('Logged In!')
+      handleCardTap();
     }
   }
 
