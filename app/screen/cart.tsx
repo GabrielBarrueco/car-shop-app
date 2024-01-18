@@ -1,23 +1,39 @@
-import { StyleSheet, Text, Image, Dimensions, View, TouchableOpacity, FlatList, ScrollView } from "react-native";
-import React, { useMemo, useState } from "react";
-import { Car } from "../../service/api.interface";
+import { StyleSheet, Text, View, TouchableOpacity, FlatList } from "react-native";
+import React, { useMemo } from "react";
 import { useCartStore } from "../../store/cartStore";
 import CartItemCard from "../components/cartItem";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { ChevronLeft, Trash2 } from "lucide-react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const Cart = () => {
-  const width = (Dimensions.get("screen").width - 32) / 2;
-  const styles = useMemo(() => createStyleSheet(width), [])
-  const { cart, total } = useCartStore();
+  const styles = useMemo(() => createStyleSheet(), [])
+  const { cart, total, removeAll: handleRemoveAll } = useCartStore();
   const value = total();
+  const navigation = useNavigation();
+
+  const handleGoBack = () => {
+    navigation.goBack();
+  }
+
   return (
-    <>
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={styles.headerContainer}>
+        <TouchableOpacity style={styles.cartButton} onPress={handleGoBack}>
+          <ChevronLeft color="#000" />
+        </TouchableOpacity>
+        <Text style={styles.headerText}>Cart</Text>
+        <TouchableOpacity style={styles.cartButton} onPress={() => handleRemoveAll()}>
+          <Trash2 color="#000" />
+        </TouchableOpacity>
+      </View>
       <View style={styles.container}>
         <View>
           <FlatList
             data={cart}
             renderItem={({ item }) => {
               return (
-                <CartItemCard cartItem={item}/>
+                <CartItemCard cartItem={item} />
               )
             }}
           />
@@ -29,20 +45,17 @@ const Cart = () => {
       </View>
 
       <View style={styles.bottomContainer}>
-        <TouchableOpacity
-          style={styles.checkoutButton}
-          onPress={() => {}}
-        >
+        <TouchableOpacity style={styles.checkoutButton} onPress={() => {}}>
           <Text style={styles.buttonText}>Checkout</Text>
         </TouchableOpacity>
       </View>
-    </>
+    </SafeAreaView>
   )
 }
 
 export default Cart;
 
-function createStyleSheet(cardWidth: number) {
+function createStyleSheet() {
   return StyleSheet.create({
     container: {
       paddingHorizontal: 16,
@@ -132,6 +145,29 @@ function createStyleSheet(cardWidth: number) {
       fontStyle: "normal",
       fontWeight: "500",
       borderColor: "#000",
+    },
+    headerContainer: {
+      flexDirection: "row",
+      alignContent: "center",
+      justifyContent: "space-between",
+      alignItems: "center",
+      marginTop: 8,
+      paddingHorizontal: 12,
+    },
+    cartButton: {
+      height: 20,
+      width: 20,
+      marginRight: 12
+    },
+    headerText: {
+      color: "#000",
+      fontFamily: "Arial",
+      fontSize: 24,
+      fontStyle: "normal",
+      fontWeight: "600",
+      lineHeight: 32,
+      borderColor: "#000",
+      letterSpacing: -1,
     },
   });
 }

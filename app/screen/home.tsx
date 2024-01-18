@@ -1,10 +1,11 @@
-import { View, TextInput, StyleSheet, Text, TouchableOpacity, FlatList } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, FlatList } from "react-native";
 import React, { useEffect, useState } from "react";
 import Card from "../components/card";
 import { getCarsList } from "../../service/api";
 import { Car } from "../../service/api.interface";
 import { ShoppingCart } from 'lucide-react-native';
 import { useNavigation } from "@react-navigation/native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 
 const Home = () => {
@@ -26,13 +27,15 @@ const Home = () => {
   }
 
   return(
-    <View style={styles.container}>
+    <SafeAreaView style={{flex: 1}}>
+      <View style={styles.container}>
         <View style={styles.headerContainer}>
           <Text style={styles.titleText}>Discover</Text>
           <TouchableOpacity style={styles.cartButton} onPress={handleCardTap}>
             <ShoppingCart color="#000"/>
           </TouchableOpacity>
         </View>
+        {/* ToDo */}
         {/* <TextInput 
           style={styles.input} 
           value={search} 
@@ -46,7 +49,8 @@ const Home = () => {
           renderItem={({item}) => <Card car={item}/>}
           showsVerticalScrollIndicator={false}
         />
-    </View>
+      </View>
+    </SafeAreaView>
   )
 }
 
@@ -54,8 +58,7 @@ export default Home
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
-    marginTop: 20,
+    paddingHorizontal: 16,
     flex: 1,
     justifyContent: "center",
   },

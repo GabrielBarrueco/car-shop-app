@@ -1,52 +1,64 @@
-import { StyleSheet, Text, Image, Dimensions, View, TouchableOpacity, FlatList, ScrollView} from "react-native";
-import React, { useMemo, useState } from "react";
-import { Car } from "../../service/api.interface";
+import { StyleSheet, Text, Image, Dimensions, View, TouchableOpacity, FlatList } from "react-native";
+import React, { useMemo } from "react";
 import { useCartStore } from "../../store/cartStore";
+import { ChevronLeft } from "lucide-react-native";
+import { useNavigation } from "@react-navigation/native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-const Detail = ({route}) => {
-  const width = (Dimensions.get("screen").width - 32) /2;
-  const styles = useMemo(() => createStyleSheet(width), [])  
-  const {add: handleAddToCart} = useCartStore();
+const Detail = ({ route }) => {
+  const width = (Dimensions.get("screen").width - 32) / 2;
+  const styles = useMemo(() => createStyleSheet(width), [])
+  const { add: handleAddToCart } = useCartStore();
   const { car } = route.params
-  console.log("car ->", car)
+  const navigation = useNavigation();
 
-  return(
-    <>
-    <View style={styles.container}>
-      <View style={styles.FlatListContainer}>
-        <FlatList horizontal
-          data={car.image}
-          renderItem={({item}) => {
-            return (
-              <Image 
-                style={styles.imageContainer} 
-                source={{uri: item.url}}
-              />
-            )
-          }}
-        />
+  const handleGoBack = () => {
+    navigation.goBack();
+  }
+
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={styles.headerContainer}>
+        <TouchableOpacity style={styles.cartButton} onPress={handleGoBack}>
+          <ChevronLeft color="#000" />
+        </TouchableOpacity>
+        <Text style={styles.titleText}>Detail</Text>
       </View>
-      <View style={styles.textContainer}>
-        <Text style={styles.titleText}>{car.name}</Text>
-        <View style={styles.categoryContainer}>
-          <Text>{car.category}</Text>
+      <View style={styles.container}>
+        <View style={styles.FlatListContainer}>
+          <FlatList horizontal
+            data={car.image}
+            renderItem={({ item }) => {
+              return (
+                <Image
+                  style={styles.imageContainer}
+                  source={{ uri: item.url }}
+                />
+              )
+            }}
+          />
         </View>
-        <Text style={styles.subtitleText}>{car.description}</Text>
-      </View>
+        <View style={styles.textContainer}>
+          <Text style={styles.titleText}>{car.name}</Text>
+          <View style={styles.categoryContainer}>
+            <Text>{car.category}</Text>
+          </View>
+          <Text style={styles.subtitleText}>{car.description}</Text>
+        </View>
       </View>
       <View style={styles.bottomContainer}>
         <View style={styles.textContainer}>
           <Text style={styles.subtitleText}>Price</Text>
           <Text style={styles.titleText}>{`C$${car.price}`}</Text>
         </View>
-        <TouchableOpacity 
-          style={styles.addToCartButton} 
+        <TouchableOpacity
+          style={styles.addToCartButton}
           onPress={() => handleAddToCart(car)}
         >
           <Text style={styles.buttonText}>Add to Cart</Text>
         </TouchableOpacity>
       </View>
-    </>
+    </SafeAreaView>
   )
 }
 
@@ -110,7 +122,7 @@ function createStyleSheet(cardWidth: number) {
       borderWidth: 1.3,
       border: "solid",
       borderColor: "rgba(0, 0, 0, 0.20)",
-      marginTop: 8, 
+      marginTop: 8,
     },
     bottomContainer: {
       paddingHorizontal: 16,
@@ -143,6 +155,19 @@ function createStyleSheet(cardWidth: number) {
       fontStyle: "normal",
       fontWeight: "500",
       borderColor: "#000",
+    },
+    headerContainer: {
+      flexDirection: "row",
+      alignContent: "center",
+      justifyContent: "flex-start",
+      alignItems: "center",
+      marginTop: 8,
+      paddingHorizontal: 12,
+    },
+    cartButton: {
+      height: 20,
+      width: 20,
+      marginRight: 12
     },
   });
 }

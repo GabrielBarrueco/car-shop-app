@@ -25,8 +25,8 @@ export default function Page() {
       <Stack.Navigator initialRouteName='Home'>
         <Stack.Screen name='Home' component={Home} options={{headerShown: false}}/>
         <Stack.Screen name='Login' component={Login} options={{headerShown: false}}/>
-        <Stack.Screen name='Detail' component={Detail} options={{title: "Detail"}}/>
-        <Stack.Screen name='Cart' component={Cart} options={{title: "Cart"}}/>
+        <Stack.Screen name='Detail' component={Detail} options={{headerShown: false}}/>
+        <Stack.Screen name='Cart' component={Cart} options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

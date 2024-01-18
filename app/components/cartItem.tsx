@@ -1,9 +1,8 @@
 import { StyleSheet, Text, Image, TouchableOpacity, Dimensions, View } from "react-native";
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { Car } from "../../service/api.interface";
 import { CartItem, useCartStore } from "../../store/cartStore";
-import { Trash2, Plus, Minus } from 'lucide-react-native';
+import { X } from 'lucide-react-native';
 
 
 interface ICartItemProps {
@@ -11,10 +10,9 @@ interface ICartItemProps {
 }
 
 const CartItemCard = (props: ICartItemProps) => {
-  const width = (Dimensions.get("screen").width - 32) / 2;
-  const styles = useMemo(() => createStyleSheet(width), [])
+  const styles = useMemo(() => createStyleSheet(), [])
   const navigation = useNavigation();
-  const {add: handleAddToCart, remove: handleRemoveFromCart, removeAll: handleRemoveAllFromCart } = useCartStore();
+  const { remove: handleRemoveFromCart } = useCartStore();
 
   const handleCardTap = () => {
     navigation.navigate("Detail", {})
@@ -33,19 +31,9 @@ const CartItemCard = (props: ICartItemProps) => {
       </View>
 
       <View>
-        <TouchableOpacity style={styles.deleteButton} onPress={() => handleRemoveAllFromCart()}>
-          <Trash2 color="#000" />
+        <TouchableOpacity style={styles.deleteButton} onPress={() => handleRemoveFromCart(props.cartItem.car_id)}>
+          <X color="#000" />
         </TouchableOpacity>
-
-        <View style={styles.qtyContainer}>
-          <TouchableOpacity style={styles.PlusMinusButton} onPress={() => handleAddToCart(props.cartItem)}>
-            <Plus color="#000" />
-          </TouchableOpacity>
-          <Text style={styles.qtyText}>1</Text>
-          <TouchableOpacity style={styles.PlusMinusButton} onPress={() => handleRemoveFromCart(props.cartItem.car_id)}>
-            <Minus color="#000" />
-          </TouchableOpacity>
-        </View>
       </View>
     </TouchableOpacity>
   )
@@ -53,7 +41,7 @@ const CartItemCard = (props: ICartItemProps) => {
 
 export default CartItemCard;
 
-function createStyleSheet(cardWidth: number) {
+function createStyleSheet(){
   return StyleSheet.create({
     itemContainer: {
       padding: 8,
