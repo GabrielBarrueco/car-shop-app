@@ -17,7 +17,7 @@ export default function Page() {
 
   return (
     <NavigationContainer>
-      <WelcomeStack />
+      {!user ? <WelcomeStack /> : <TabNavigator/> }
     </NavigationContainer>
   );
 }
