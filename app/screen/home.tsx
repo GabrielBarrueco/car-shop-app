@@ -22,18 +22,11 @@ const Home = () => {
     setCars(response)
   }
 
-  const handleCardTap = () => {
-    navigation.navigate("Cart")
-  }
-
   return(
     <SafeAreaView style={{flex: 1}}>
       <View style={styles.container}>
         <View style={styles.headerContainer}>
           <Text style={styles.titleText}>Discover</Text>
-          <TouchableOpacity style={styles.cartButton} onPress={handleCardTap}>
-            <ShoppingCart color="#000"/>
-          </TouchableOpacity>
         </View>
         {/* ToDo */}
         {/* <TextInput 

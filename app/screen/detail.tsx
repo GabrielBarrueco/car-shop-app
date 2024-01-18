@@ -17,48 +17,47 @@ const Detail = ({ route }) => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.headerContainer}>
-        <TouchableOpacity style={styles.cartButton} onPress={handleGoBack}>
-          <ChevronLeft color="#000" />
-        </TouchableOpacity>
-        <Text style={styles.titleText}>Detail</Text>
-      </View>
-      <View style={styles.container}>
-        <View style={styles.FlatListContainer}>
-          <FlatList horizontal
-            data={car.image}
-            renderItem={({ item }) => {
-              return (
-                <Image
-                  style={styles.imageContainer}
-                  source={{ uri: item.url }}
-                />
-              )
-            }}
-          />
+    <>
+      <SafeAreaView style={{ flex: 1 }}>
+        <View style={styles.headerContainer}>
+          <TouchableOpacity style={styles.cartButton} onPress={handleGoBack}>
+            <ChevronLeft color="#000" />
+          </TouchableOpacity>
+          <Text style={styles.titleText}>Detail</Text>
         </View>
-        <View style={styles.textContainer}>
-          <Text style={styles.titleText}>{car.name}</Text>
-          <View style={styles.categoryContainer}>
-            <Text>{car.category}</Text>
+        <View style={styles.container}>
+          <View style={styles.FlatListContainer}>
+            <FlatList horizontal
+              data={car.image}
+              renderItem={({ item }) => {
+                return (
+                  <Image
+                    style={styles.imageContainer}
+                    source={{ uri: item.url }}
+                  />
+                )
+              }}
+            />
           </View>
-          <Text style={styles.subtitleText}>{car.description}</Text>
+          <View style={styles.textContainer}>
+            <Text style={styles.titleText}>{car.name}</Text>
+            <View style={styles.categoryContainer}>
+              <Text>{car.category}</Text>
+            </View>
+            <Text style={styles.subtitleText}>{car.description}</Text>
+          </View>
         </View>
-      </View>
+      </SafeAreaView>
       <View style={styles.bottomContainer}>
         <View style={styles.textContainer}>
           <Text style={styles.subtitleText}>Price</Text>
           <Text style={styles.titleText}>{`C$${car.price}`}</Text>
         </View>
-        <TouchableOpacity
-          style={styles.addToCartButton}
-          onPress={() => handleAddToCart(car)}
-        >
+        <TouchableOpacity style={styles.addToCartButton} onPress={() => handleAddToCart(car)}>
           <Text style={styles.buttonText}>Add to Cart</Text>
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </>
   )
 }
 
@@ -131,11 +130,11 @@ function createStyleSheet(cardWidth: number) {
       height: 100,
       flexShrink: 0,
       borderTop: 1,
-      borderWidth: 1.3,
+      borderTopWidth: 1.3,
       border: "solid",
       borderColor: "rgba(0, 0, 0, 0.20)",
       justifyContent: "space-between",
-      alignItems: "flex-start",
+      alignItems: "center",
 
     },
     addToCartButton: {

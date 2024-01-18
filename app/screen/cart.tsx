@@ -16,40 +16,43 @@ const Cart = () => {
     navigation.goBack();
   }
 
-  return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.headerContainer}>
-        <TouchableOpacity style={styles.cartButton} onPress={handleGoBack}>
-          <ChevronLeft color="#000" />
-        </TouchableOpacity>
-        <Text style={styles.headerText}>Cart</Text>
-        <TouchableOpacity style={styles.cartButton} onPress={() => handleRemoveAll()}>
-          <Trash2 color="#000" />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.container}>
-        <View>
-          <FlatList
-            data={cart}
-            renderItem={({ item }) => {
-              return (
-                <CartItemCard cartItem={item} />
-              )
-            }}
-          />
-        </View>
-        <View style={styles.textContainer}>
-          <Text style={styles.subtitleText}>Total</Text>
-          <Text style={styles.titleText}>{value}</Text>
-        </View>
-      </View>
+  const handleStripeCheckout = () => alert("ToDo: Stripe checkout")
 
+  return (
+    <>
+      <SafeAreaView style={{ flex: 1, justifyContent: "space-between" }}>
+        <View style={styles.headerContainer}>
+          <TouchableOpacity style={styles.cartButton} onPress={handleGoBack}>
+            <ChevronLeft color="#000" />
+          </TouchableOpacity>
+          <Text style={styles.headerText}>Cart</Text>
+          <TouchableOpacity style={styles.cartButton} onPress={() => handleRemoveAll()}>
+            <Trash2 color="#000" />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.container}>
+          <View>
+            <FlatList
+              data={cart}
+              renderItem={({ item }) => {
+                return (
+                  <CartItemCard cartItem={item} />
+                )
+              }}
+            />
+          </View>
+          <View style={styles.textContainer}>
+            <Text style={styles.subtitleText}>Total</Text>
+            <Text style={styles.titleText}>{value}</Text>
+          </View>
+        </View>
+      </SafeAreaView>
       <View style={styles.bottomContainer}>
-        <TouchableOpacity style={styles.checkoutButton} onPress={() => {}}>
+        <TouchableOpacity style={styles.checkoutButton} onPress={handleStripeCheckout}>
           <Text style={styles.buttonText}>Checkout</Text>
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </>
   )
 }
 
@@ -92,41 +95,17 @@ function createStyleSheet() {
       marginTop: 12,
       textAlign: "left"
     },
-    imageContainer: {
-      flex: 1,
-      width: 340,
-      height: 360,
-      borderRadius: 8,
-      marginRight: 4,
-    },
-    itemContainer: {
-      flex: 1,
-      height: 100,
-      padding: 12,
-      flexDirection: "row",
-      justifyContent: "center",
-      alignItems: "center",
-      gap: 12.5,
-      flexShrink: 0,
-      borderRadius: 6,
-      borderWidth: 1.3,
-      border: "solid",
-      borderColor: "rgba(0, 0, 0, 0.20)",
-      marginTop: 8,
-    },
     bottomContainer: {
       paddingHorizontal: 16,
       flexDirection: "row",
       width: "100%",
       height: 100,
-      flexShrink: 0,
       borderTop: 1,
-      borderWidth: 1.3,
+      borderTopWidth: 1.3,
       border: "solid",
       borderColor: "rgba(0, 0, 0, 0.20)",
       justifyContent: "space-between",
-      alignItems: "flex-start",
-
+      alignItems: "center",
     },
     checkoutButton: {
       flex: 1,
@@ -136,7 +115,6 @@ function createStyleSheet() {
       borderRadius: 10,
       height: 50,
       backgroundColor: "#000",
-      marginTop: 12
     },
     buttonText: {
       color: "#FFF",

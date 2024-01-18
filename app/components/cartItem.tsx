@@ -1,9 +1,7 @@
-import { StyleSheet, Text, Image, TouchableOpacity, Dimensions, View } from "react-native";
+import { StyleSheet, Text, Image, TouchableOpacity, View } from "react-native";
 import React, { useMemo } from "react";
-import { useNavigation } from "@react-navigation/native";
 import { CartItem, useCartStore } from "../../store/cartStore";
 import { X } from 'lucide-react-native';
-
 
 interface ICartItemProps {
   cartItem: CartItem;
@@ -11,15 +9,10 @@ interface ICartItemProps {
 
 const CartItemCard = (props: ICartItemProps) => {
   const styles = useMemo(() => createStyleSheet(), [])
-  const navigation = useNavigation();
   const { remove: handleRemoveFromCart } = useCartStore();
 
-  const handleCardTap = () => {
-    navigation.navigate("Detail", {})
-  }
-
   return (
-    <TouchableOpacity style={styles.itemContainer} onPress={handleCardTap}>
+    <View style={styles.itemContainer}>
       <Image
         style={styles.imageContainer}
         source={{ uri: props.cartItem.image[0].url }}
@@ -35,7 +28,7 @@ const CartItemCard = (props: ICartItemProps) => {
           <X color="#000" />
         </TouchableOpacity>
       </View>
-    </TouchableOpacity>
+    </View>
   )
 }
 
@@ -54,11 +47,6 @@ function createStyleSheet(){
       borderRadius: 6,
       backgroundColor: "rgba(0, 0, 0, 0.05)",
       marginTop: 8,
-    },
-    sideContainer: {
-      width: 80,
-      height: "100%",
-      paddingHorizontal: 16,
     },
     textContainer: {
       height: "100%",
@@ -80,19 +68,6 @@ function createStyleSheet(){
       borderRadius: 4,
       marginRight: 4,
     },
-    bottomContainer: {
-      paddingHorizontal: 16,
-      flexDirection: "row",
-      width: "100%",
-      height: 100,
-      flexShrink: 0,
-      borderTop: 1,
-      borderWidth: 1.3,
-      border: "solid",
-      borderColor: "rgba(0, 0, 0, 0.20)",
-      justifyContent: "space-between",
-      alignItems: "flex-start",
-    },
     checkoutButton: {
       flex: 1,
       paddingHorizontal: 18,
@@ -111,38 +86,12 @@ function createStyleSheet(){
       fontWeight: "500",
       borderColor: "#000",
     },
-    PlusMinusButton: {
-      height: 24,
-      width: 24,
-      alignItems: "center",
-      justifyContent: "center",
-      borderWidth: 0.9,
-      border: "solid",
-      borderColor: "rgba(0, 0, 0, 0.20)",
-    },
     deleteButton: {
       height: 24,
       width: 24,
       alignItems: "center",
       justifyContent: "center",
       alignSelf: "flex-end",
-    },
-    qtyContainer: {
-      flex: 1,
-      flexDirection: "row",
-      justifyContent: "space-between",
-      alignItems: "center",
-      flexShrink: 0,
-      marginTop: 8,
-    },
-    qtyText: {
-      color: "#000",
-      fontFamily: "Arial",
-      fontSize: 16,
-      fontStyle: "normal",
-      fontWeight: "400",
-      marginHorizontal: 6
-
     },
   });
 }
