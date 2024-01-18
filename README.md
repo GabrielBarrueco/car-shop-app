@@ -1,6 +1,3 @@
-
-
-```markdown
 # Car Shop App 🚗
 
 Welcome to the Car Shop App repository!
