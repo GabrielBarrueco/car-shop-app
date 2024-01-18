@@ -25,6 +25,8 @@ The Car Shop App is built using the following technologies:
 - **Zustand**: A minimalist state management library for React, providing a simple and efficient way to manage application state.
 
 - **GraphQL (Hygraph CMS API)**: The application leverages GraphQL to interact with the Hygraph CMS API, enabling efficient and flexible data queries.
+  
+- Firebase Auth: Integrating Firebase Authentication for secure and seamless user authentication.
 
 ## Next Steps 🚀
 
