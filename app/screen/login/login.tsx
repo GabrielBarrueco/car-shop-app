@@ -1,10 +1,12 @@
 import { View, TextInput, StyleSheet, ActivityIndicator, KeyboardAvoidingView, Text, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
-import { FIREBASE_AUTH } from "../../FirebaseConfig";
+import React, { useMemo, useState } from "react";
+import { FIREBASE_AUTH } from "../../../FirebaseConfig";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth"
 import { useNavigation } from "@react-navigation/native";
+import { loginStyleSheet } from "./login.style";
 
 const Login = () => {
+  const styles = useMemo(() => loginStyleSheet(), [])
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -20,12 +22,13 @@ const Login = () => {
     setLoading(true);
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
-    } catch (error: any) {
-      alert('Login failed:' +error.message)
-    }finally{
-      setLoading(false)
-      alert('Logged In!')
+      alert('Logged In!');
       handleCardTap();
+    } catch (error: any) {
+      alert('Login failed:' +error.message);
+      return;
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -33,13 +36,14 @@ const Login = () => {
     setLoading(true);
     try {
       const response = await createUserWithEmailAndPassword(auth, email, password);
-      console.log("[LOGIN SUCESS]:", response)
-      alert('Check your email')
-    } catch (error: any) {56
-      console.log("[LOGIN ERROR]:", error)
-      alert('sign Up failed:' +error.message)
-    }finally{
-      setLoading(false)
+      console.log("[LOGIN SUCESS]:", response);
+      alert('Check your email');
+    } catch (error: any) {
+      console.log("[LOGIN ERROR]:", error);
+      alert('sign Up failed:' +error.message);
+      return;
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -80,58 +84,3 @@ const Login = () => {
 }
 
 export default Login
-
-const styles = StyleSheet.create({
-  container: {
-    marginHorizontal: 20,
-    flex: 1,
-    justifyContent: "center",
-  },
-  input: {
-    height: 53,
-    paddingVertical: 15,
-    paddingHorizontal: 8,
-    alignItems: "center",
-    flexShrink: 0,
-    borderRadius: 10,
-    backgroundColor: "rgba(0, 0, 0, 0.05)",
-    marginTop: 8,
-  },
-  titleText: {
-    color: "#000",
-    fontFamily: "Arial",
-    fontSize: 32,
-    fontStyle: "normal",
-    fontWeight: "600",
-    lineHeight: 49, /* 153.125% */
-    letterSpacing: -1.6,
-  },
-  subtitleText: {
-    color: "#000",
-    fontFamily: "Arial",
-    fontSize: 18,
-    fontStyle: "normal",
-    fontWeight: "400",
-    lineHeight: 49, /* 153.125% */
-    letterSpacing: -1,
-  },
-  signUpButton: {
-    paddingHorizontal: 18,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 10,
-    height: 50,
-    backgroundColor: "#000",
-    marginTop: 12
-  },
-  buttonText: {
-    color: "#FFF",
-    fontFamily: "Arial",
-    fontSize: 18,
-    fontStyle: "normal",
-    fontWeight: "400",
-    lineHeight: 49,
-    letterSpacing: -1,
-  },
-
-});

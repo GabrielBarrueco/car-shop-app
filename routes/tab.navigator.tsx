@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Cart from '../app/screen/cart';
+import Cart from '../app/screen/cart/cart';
 import HomeStack from './stack.navigator';
 import { ShoppingCart, Home } from 'lucide-react-native';
 import { useCartStore } from '../store/cartStore';

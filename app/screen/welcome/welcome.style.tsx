@@ -1,27 +1,6 @@
-import React, { useMemo } from "react";
-import { Image, StyleSheet, TouchableOpacity, Text, View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { StyleSheet} from "react-native";
 
-export const Welcome = () => {
-  const styles = useMemo(() => createStyleSheet(), [])
-  const navigation = useNavigation();
-
-  const handleCardTap = () => {
-    navigation.navigate("Login")
-  }
-
-  return (
-    <View style={{ flex: 1 }}>
-      <Image style={{ flex: 1 }} source={{ uri: "https://media.graphassets.com/output=format:jpg/resize=height:800,fit:max/mmjZqoceTIqArZaeBX8z" }} />
-      <Text style={styles.welcomeText}>Define Yourself In Your Unique Way.</Text>
-      <TouchableOpacity style={styles.loginButton} onPress={handleCardTap}>
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
-    </View>
-  )
-}
-
-function createStyleSheet() {
+export function welcomeStyleSheet() {
   return StyleSheet.create({
     loginButton: {
       flex: 1,
@@ -58,6 +37,12 @@ function createStyleSheet() {
       fontWeight: "400",
       lineHeight: 49,
       letterSpacing: -1,
+    },
+    container: {
+      flex: 1,
+    },
+    image: {
+      flex: 1,
     },
   });
 }
