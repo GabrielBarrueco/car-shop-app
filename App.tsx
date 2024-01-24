@@ -23,10 +23,11 @@ export default function Page() {
     <NavigationContainer>
       <Stack.Navigator>
         {!user ?
-         <WelcomeStack /> 
+        <Stack.Screen component={WelcomeStack} name="WelcomeStack"  options={{ headerShown: false }}/> 
          :
-        <TabNavigator/> }
-        <HomeStack />
+         <Stack.Screen component={TabNavigator} name="TabNavigator"  options={{ headerShown: false }}/> 
+        }
+       <Stack.Screen component={HomeStack} name="HomeStack"  options={{ headerShown: false }}/> 
       </Stack.Navigator>
     </NavigationContainer>
   );
