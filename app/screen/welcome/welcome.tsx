@@ -2,12 +2,16 @@ import React, { useMemo } from "react";
 import { Image, TouchableOpacity, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { welcomeStyleSheet } from "./welcome.style";
+import {  NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { StackParamList } from "../../../routes/welcome.navigator";
+
+export type StackNavigation = NativeStackNavigationProp<StackParamList>;
 
 const imageUrl = "https://media.graphassets.com/output=format:jpg/resize=height:800,fit:max/mmjZqoceTIqArZaeBX8z";
 
 export const Welcome = () => {
   const styles = useMemo(() => welcomeStyleSheet(), [])
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigation>();
 
   const handleCardTap = () => {
     navigation.navigate("Login")

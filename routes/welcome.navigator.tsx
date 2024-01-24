@@ -1,11 +1,16 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from '../app/screen/login/login';
-import Home from '../app/screen/home/home';
-import Detail from '../app/screen/detail/detail';
-import HomeStack from './stack.navigator';
+import HomeStack from './homeStack.navigator';
 import { Welcome } from '../app/screen/welcome/welcome';
+import { NavigationContainer } from '@react-navigation/native';
 
-const Stack = createNativeStackNavigator();
+export type StackParamList = {
+  Welcome: undefined;
+  Login: undefined;
+  HomeStack: undefined;
+};
+
+const Stack = createNativeStackNavigator<StackParamList>();
 
 export default function WelcomeStack() {
 

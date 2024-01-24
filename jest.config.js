@@ -13,7 +13,7 @@ module.exports = {
     '\\.(mp4|webm)$': '<rootDir>/src/assets/videos/__tests__/video.mock.ts'
   },
   preset: 'jest-expo',
-  setupFilesAfterEnv: ['@testing-library/jest-native/extend-expect'],
+  setupFilesAfterEnv: ['@testing-library/jest-native/extend-expect', "./jest/setup.js"],
   testEnvironment: 'node',
   testPathIgnorePatterns: ['/node_modules/'],
   transformIgnorePatterns: [

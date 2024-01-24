@@ -4,6 +4,10 @@ import { User, onAuthStateChanged } from 'firebase/auth';
 import { FIREBASE_AUTH } from './FirebaseConfig';
 import { TabNavigator } from './routes/tab.navigator';
 import WelcomeStack from './routes/welcome.navigator';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeStack from './routes/homeStack.navigator';
+
+const Stack = createNativeStackNavigator();
 
 export default function Page() {
   const [user, setUser] = useState<User | null>(null);
@@ -17,7 +21,13 @@ export default function Page() {
 
   return (
     <NavigationContainer>
-      {!user ? <WelcomeStack /> : <TabNavigator/> }
+      <Stack.Navigator>
+        {!user ?
+         <WelcomeStack /> 
+         :
+        <TabNavigator/> }
+        <HomeStack />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }
